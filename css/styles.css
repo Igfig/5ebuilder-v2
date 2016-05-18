@@ -421,6 +421,7 @@ textarea {
 html {
 	margin: 0;
 	padding: 0;
+	font-family: "Estrangelo Edessa", sans-serif;
 }
 
 body {
@@ -429,6 +430,13 @@ body {
 .monster-block {
 	float: right;
 	width: 300px;
+}
+.monster-block {
+	font-family: 'Trebuchet MS', sans-serif;
+	
+	h2 {
+		font-family: serif;
+	}
 }
 
 /*# sourceMappingURL=styles.css.map*/
