@@ -1,0 +1,24 @@
+{
+	"SIZES": {
+		"Tiny": 	{ "hd": 4 }, 
+		"Small": 	{ "hd": 6 }, 
+		"Medium": 	{ "hd": 8 }, 
+		"Large": 	{ "hd": 10 }, 
+		"Huge": 	{ "hd": 12 }, 
+		"Gargantuan": { "hd": 20 } 
+	},
+	"TYPES": [ "aberration", "beast", "celestial", "construct", "dragon", "elemental",
+			"fey", "fiend", "giant", "humanoid", "monstrosity", "ooze", "plant", "undead" ],
+	"TAGS": [ "aarakocra", "aasimar", "bullywug", "demon", "devil", "dragonborn", "dwarf", 
+			"elf", "gith", "goblinoid", "gnoll", "gnome", "grimlock", "half-elf", 
+			"half-orc", "halfling", "human", "kenku", "kobold", "kuo-toa", "lizardfolk", 
+			"merfolk", "orc", "quaggoth", "sahuagin", "shapechanger", "tiefling", 
+			"thri-kreen", "titan", "troglodyte", "yuan-ti", "yugoloth", "zombie" ],
+	"ALIGNMENTS": [ "unaligned", "lawful good", "neutral good", "chaotic good",
+			"lawful neutral", "neutral", "chaotic neutral", "lawful evil",
+			"neutral evil", "chaotic evil", "any alignment", "any good alignment",
+			"any non-good alignment", "any evil alignment", "any non-evil alignment",
+			"any lawful alignment", "any non-lawful alignment", "any chaotic alignment",
+			"any non-chaotic alignment", "any neutral alignment",
+			"any non-neutral alignment" ]
+} 
