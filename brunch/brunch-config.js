@@ -22,6 +22,12 @@ module.exports = {
   plugins: {
 	  on: ['autoprefixer-brunch', 'postcss-brunch', 'precss'],
 	  off: [],
+	  postcss: {
+	      processors: [
+	          require('autoprefixer')(['last 8 versions']),
+	          require('precss')
+	      ]
+	  },
 	  autoReload: {enabled: false}
   },
   modules: {

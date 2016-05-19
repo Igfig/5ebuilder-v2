@@ -2,7 +2,8 @@
 
 <html ng-app="monsterBuilder" ng-controller="monsterController">
 <head>
-	<title>5e Monster Builder</title>
+	<title>Angular Demo</title>
+	<!-- <title>5e Monster Builder</title> -->
 	
 	<link rel="stylesheet" href="css/styles.css">
 	
@@ -11,30 +12,37 @@
 </head>
 <body>
 
-<article class="monster-block">
-	<header>
-		<h2>{{monster.name}}</h2>
-		<p>{{monster.size}} {{monster.type}}<span ng-if="monster.tags"> ({{monster.tags}})</span>,
-		{{monster.alignment}}</p>
-	</header>
-	<hr>
-</article>
-
+<div class="untabbed-block">
+	<article class="monster-block">
+		<header>
+			<h2><span ng-if="!monster.name">Monster Name</span>{{monster.name}}</h2>
+			<p>{{monster.size}} {{monster.type}}<span ng-if="monster.tags"> ({{monster.tags}})</span>,
+			{{monster.alignment}}</p>
+		</header>
+		<hr>
+		
+		
+		Hit Points: (<output ng-bind="monster.hd">
+			</output>d<output ng-bind="monster.size.hd">
+			</output>+<output ng-bind="abilities[2].mod * monster.hd"></output>)
+	</article>
+</div>
 
 <main>
 	<form id="categories">
 		<label>Name: <input type="text" ng-model="monster.name"></label>
 		<label><input type="checkbox" ng-model="monster.nameIsProper"> is proper name</label> 
 		<br>
-		<label>Size: <select 
+		<label>Size: <!-- <select 
 				ng-model="monster.size" 
-				ng-options="size for size in SIZES"
-				ng-init="monster.size='Medium'">
+				ng-options="size as size.name for size in SIZES">
+		</select> --><select 
+				ng-model="monster.size" 
+				ng-options="size for (size, properties) in SIZES">
 		</select></label><br>
 		<label>Type: <select 
 				ng-model="monster.type"
-				ng-options="type for type in TYPES"
-				ng-init="monster.type='humanoid'">
+				ng-options="type for type in TYPES">
 		</select></label><br>
 		<label>Tags: <input list="monster-tags" 
 				ng-model="monster.tags">
@@ -44,17 +52,18 @@
 		</label><br>
 		<label>Alignment: <select 
 				ng-model="monster.alignment"
-				ng-options="alignment for alignment in ALIGNMENTS"
-				ng-init="monster.alignment='unaligned'">
+				ng-options="alignment for alignment in ALIGNMENTS">
 		</select>
 		</label>
 	</form>
 	
 	<form id="abilities">
-		<div ng-repeat="ability in ABILITIES">
+		<!-- <div ng-repeat="(name, ability) in abilities"> -->
+		<div ng-repeat="ability in abilities">
+			<!-- <label>{{name}}  -->
 			<label>{{ability.name}} 
 			<input type="number" min="1" max="30" ng-model="ability.score"></label>
-			<output ng-model="ability.mod">{{getAbilityMod(ability.score)}}</output>
+			<span ng-show="ability.mod > 0">+</span><output>{{ability.mod}}</output>
 		</div>
 	</form>
 </main>

@@ -12,7 +12,7 @@
     "build": "brunch build --production"
   },
   "dependencies": {
-    "postcss-brunch": "^0.4.x",
+    "postcss-brunch": "^0.5.x",
 	"autoprefixer": "^5.1.0"
   },
   "devDependencies": {
