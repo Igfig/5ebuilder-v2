@@ -1,0 +1,29 @@
+.tabs {
+	position: relative;
+	bottom: -1px;
+	
+	&.active {
+		border-bottom-color: white;
+	}
+	
+	a {
+		display: block;
+		margin: 0 $tab-spacing-h 0 0;
+		padding: $tab-spacing-v $tab-spacing-h;
+		border: 1px solid black; /*TODO: might want to move this to a components css*/
+		
+		&.active {
+			border-bottom-color: white;
+		}
+	}
+}
+
+.tab-content {
+	position: relative;
+	b/order: 1px solid black;
+	padding: $body-padding;
+	
+	h2 {
+		m/argin: 0;
+	}
+}

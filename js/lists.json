@@ -1,12 +1,10 @@
 {
-	"SIZES": {
-		"Tiny": 	{ "hd": 4 }, 
-		"Small": 	{ "hd": 6 }, 
-		"Medium": 	{ "hd": 8 }, 
-		"Large": 	{ "hd": 10 }, 
-		"Huge": 	{ "hd": 12 }, 
-		"Gargantuan": { "hd": 20 } 
-	},
+	"SIZES": [	{ "id": "Tiny",		"hd": 4,	"speed": 20 }, 
+				{ "id": "Small",	"hd": 6,	"speed": 20 }, 
+				{ "id": "Medium",	"hd": 8,	"speed": 30 }, 
+				{ "id": "Large",	"hd": 10,	"speed": 40 }, 
+				{ "id": "Huge",		"hd": 12,	"speed": 50 }, 
+				{ "id": "Gargantuan",	"hd": 20,	"speed": 50 } ],
 	"TYPES": [ "aberration", "beast", "celestial", "construct", "dragon", "elemental",
 			"fey", "fiend", "giant", "humanoid", "monstrosity", "ooze", "plant", "undead" ],
 	"TAGS": [ "aarakocra", "aasimar", "bullywug", "demon", "devil", "dragonborn", "dwarf", 
@@ -20,5 +18,22 @@
 			"any non-good alignment", "any evil alignment", "any non-evil alignment",
 			"any lawful alignment", "any non-lawful alignment", "any chaotic alignment",
 			"any non-chaotic alignment", "any neutral alignment",
-			"any non-neutral alignment" ]
+			"any non-neutral alignment" ],
+	"monster" : {
+		"abilities": [	{ "id" : "Str", "score" : 10, "mod" : 0 },
+						{ "id" : "Dex", "score" : 10, "mod" : 0 }, 
+						{ "id" : "Con", "score" : 10, "mod" : 0 },
+						{ "id" : "Int", "score" : 10, "mod" : 0 }, 
+						{ "id" : "Wis", "score" : 10, "mod" : 0 },
+						{ "id" : "Cha", "score" : 10, "mod" : 0 } ],
+		"alignment": "any alignment",
+		"attacks": [],
+		"hd" : 1,
+		"movement" : [	{ "id": "", "speed": 0 },
+						{ "id": "fly", "speed": 0 },
+						{ "id": "swim", "speed": 0 },
+						{ "id": "climb", "speed": 0 },
+						{ "id": "burrow", "speed": 0 } ],
+		"type": "humanoid"
+	}
 } 

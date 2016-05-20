@@ -382,30 +382,108 @@ textarea {
   font: inherit; /* 2 */
 }
 
+ul, ol {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+}
 html {
 	margin: 0;
 	padding: 0;
 	font-family: "Estrangelo Edessa", sans-serif;
+	font-size: 16px;
 }
 
 body {
+	margin: 0;
 	padding: 2vw;
 }
-.untabbed-block {
+.untabbed-block { /* FIXME: needs better name */
 	float: right;
-	width: 400px;
+	width: 350px;	
 } 
+
 .monster-block {
 	width: 100%;
 	font-family: 'Trebuchet MS', sans-serif;
 	font-size: 14px;
 } 
+
 .monster-block h2 {
   font-family: serif;
 } 
+
 .monster-block header p {
   font-style: italic;
 }
 
+.builder-block {
+	-webkit-column-width: 290px;
+	   -moz-column-width: 290px;
+	        column-width: 290px;
+	-webkit-column-gap: 10px;
+	   -moz-column-gap: 10px;
+	        column-gap: 10px;
+	p/adding: 2vw;
+	clear:left;
+	position: relative
+}
+
+.builder-block>* {
+  display: table;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  margin: 0 0 -webkit-calc(2 * 2vw);
+  margin: 0 0 calc(2 * 2vw);
+}
+.tabs {
+	position: relative;
+	bottom: -1px;
+}
+.tabs a {
+  display: block;
+  margin: 0 10px 0 0;
+  padding: 5px 10px;
+  border: 1px solid black/*TODO: might want to move this to a components css*/
+}
+.tabs a.active {
+  border-bottom-color: white;
+}
+.tabs.active {
+  border-bottom-color: white;
+}
+
+.tab-content {
+	position: relative;
+	b/order: 1px solid black;
+	padding: 2vw;
+}
+
+.tab-content h2 {
+  m/argin: 0;
+}
+.inline {
+	display: inline
+}
+.inline>* {
+  display: inline;
+}
+.horizontal {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	f/lex-flow: row nowrap;
+}
+
+.two-columns {
+	-webkit-column-count: 2;
+	   -moz-column-count: 2;
+	        column-count: 2;
+}
 
 /*# sourceMappingURL=styles.css.map*/

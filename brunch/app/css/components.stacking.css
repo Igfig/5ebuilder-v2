@@ -1,0 +1,8 @@
+.horizontal {
+	display: flex;
+	f/lex-flow: row nowrap;
+}
+
+.two-columns {
+	column-count: 2;
+}

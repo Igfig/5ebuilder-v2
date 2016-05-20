@@ -152,72 +152,105 @@ document.addEventListener('DOMContentLoaded', function() {
   // do your setup here
 });
 
+/* TODO: find a better way to refer to Con mod than "monster.abilities[2].mod"
+ * Ideally, should be able to refer to it by name
+ */
+
+
 var app = angular.module("monsterBuilder", []);
-app.controller("monsterController", function($scope, $http) {
+app.controller("monsterController", function($scope, $http, $filter) {
 	
-	/* load static variables from JSON */
+	/* load variables from JSON */
 	$http.get("js/lists.json").then(function(lists){
 		for (list in lists.data){
 			$scope[list] = lists.data[list];
 		}
 		
-		/* init variables depending on static variables */
-		$scope.monster = {};
-		//$scope.monster.size = $scope.SIZES[0];
-		$scope.monster.size = $scope.SIZES['Medium'];
-		$scope.monster.type = 'humanoid';
-		$scope.monster.alignment = 'any alignment';
-		$scope.monster.hd = 2;
+		/* initialize dependent variables */
+		$scope.monster.size = getFromArray($scope.SIZES, 'Medium');
+			//$filter('filter')($scope.SIZES, {name:'Medium'})[0];
+		//$scope.monster.speed.ground = $scope.monster.size.speed;
+		
+		// bind ability scores to mods (and save bonuses?)
+		for (var ability in $scope.monster.abilities) {
+			bindModToAbility($scope.monster.abilities[ability]);
+		}
+		
+		// calculate monster hp
+		$scope.$watchGroup(//["monster.size.hd", "monster.hd", "monster.abilities[2].mod"],
+				["monster.size.hd", "monster.hd", abMod('Con')],
+				function(){
+			$scope.monster.hp = diceAverage($scope.monster.hd, 
+					$scope.monster.size.hd, abMod('Con'));
+		});
+		
+		
+		// functions dependent on loaded variables
+		
+		$scope.newAttack = function() {
+			var attack = {damage:{	dice:{
+										num: 1, 
+										size: 8},
+									total: 4}}
+			
+			$scope.monster.attacks.push(attack);
+			
+			bindTotalDamageToAttack(attack);
+		}
 	});
 	
-	$scope.abilities = [ { name : "Str", score : 10, mod : 0 },
-	                     { name : "Dex", score : 10, mod : 0 }, 
-	                     { name : "Con", score : 10, mod : 0 },
-	                     { name : "Int", score : 10, mod : 0 }, 
-	                     { name : "Wis", score : 10, mod : 0 },
-	                     { name : "Cha", score : 10, mod : 0 } ];
-	/*$scope.abilities = {"Str": { score : 10, mod : 0 },
-						"Dex": { score : 10, mod : 0 }, 
-						"Con": { score : 15, mod : 0 },
-						"Int": { score : 10, mod : 0 }, 
-						"Wis": { score : 10, mod : 0 },
-						"Cha": { score : 10, mod : 0 }};*/
+	$scope.tab = "stats";
 	
-	
-	
-	for (var ability in $scope.abilities) {
-		bindModToAbility(ability);
+	$scope.goToTab = function(tab) {
+		$scope.tab = tab;
 	}
 	
 	
-	// bind ability scores and mods
 	
-	//functions, but a little messy maybe?
+	
+	/* PRIVATE FUNCTIONS */
+	
+	/* binds an ability's mod to its base score */
 	function bindModToAbility(ability) {
+		$scope.$watch(function(){
+			return ability.score;
+		}, function(){
+			ability.mod = Math.floor((ability.score - 10) / 2);
+		});
+	}
+	
+	//old, messy version of ability binding
+	/*function bindModToAbility(ability) {
 		$scope.$watch("abilities['" + ability + "'].score", function(score) {
 			$scope.abilities[ability].mod = Math.floor((score - 10) / 2);
 		});
+	}*/
+	
+	function bindTotalDamageToAttack(attack) {
+		$scope.$watchGroup(function(){
+			return [attack.damage.dice.num, attack.damage.dice.size, "monster.abilities[0].mod"];
+			
+		}, function(){
+			attack.damage.total = diceAverage(attack.damage.dice.num, attack.damage.dice.size);
+		});
 	}
 	
-	//try to do it using the local scope created by ng-repeat
-	/*function bindModToAbility(ability) {
-		$scope.$watch("", function(){
-			
-		});
-	}*/
+	function diceAverage(num, size, bonus) {
+		bonus = bonus || 0;
+		return Math.floor(num * ((size + 1) / 2 + bonus));
+	}
 	
-	/*for (ability in $scope.abilities) {
-	$scope.$watch(function(){return ability.score}, function(score, old, scope) {
-		ability.mod = Math.floor((score - 10) / 2);
-	});
-	}*/
-	/*$scope.watchCollection('abilities', function(){
-		
-	});*/
-	/*
-	 * $scope.getAbilityMod = function(ability) { return Math.floor((ability -
-	 * 10) / 2); }
-	 */
+	function getFromArray(array, value) {
+		try {
+			return $filter('filter')(array, {id: value})[0];
+		} catch (err) {
+			return null;
+		}
+	}
+	
+	function abMod(ability) {
+		return getFromArray($scope.abilities, ability);
+	}
 });
 
 require.register("___globals___", function(exports, require, module) {

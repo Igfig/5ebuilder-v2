@@ -1,0 +1,27 @@
+.monster-block {
+	width: 100%;
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: $statblock-font-size;
+	
+	h2 {
+		font-family: serif;
+	}
+	
+	header p {
+		font-style: italic;
+	}
+}
+
+.builder-block {
+	column-width: $tabbed-column-width;
+	column-gap: $tabbed-column-spacing;
+	p/adding: $body-padding;
+	clear:left;
+	position: relative;
+	
+	&>* {
+		display: table;
+		break-inside: avoid;
+		margin: 0 0 calc(2 * $body-padding);
+	}
+}

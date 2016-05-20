@@ -1,4 +1,4 @@
-.untabbed-block {
+.untabbed-block { /* FIXME: needs better name */
 	float: right;
-	width: $untabbed-width;
+	width: $untabbed-width;	
 } 

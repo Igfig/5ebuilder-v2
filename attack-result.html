@@ -1,0 +1,8 @@
+<span ng-bind="attack.name"></span>:
+				<output ng-bind="attack.damage.total + monster.abilities[0].mod"></output>
+				(<output type="number" 
+						ng-bind="attack.damage.dice.num"></output>d<output type="number" 
+						ng-bind="attack.damage.dice.size"></output><span 
+						ng-show="monster.abilities[0].mod > 0">+</span><output 
+						ng-bind="monster.abilities[0].mod"
+						ng-show="monster.abilities[0].mod != 0"></output>)

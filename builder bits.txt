@@ -15,4 +15,3 @@
 				{ "name": "Large",	"hd": 10 }, 
 				{ "name": "Huge",	"hd": 12 }, 
 				{ "name": "Gargantuan",	"hd": 20 } ],
-			

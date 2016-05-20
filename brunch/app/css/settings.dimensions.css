@@ -1,1 +1,8 @@
-$untabbed-width: 400px;
+$body-padding: 2vw;
+
+$untabbed-width: 350px;
+$tabbed-column-width: 290px;
+$tabbed-column-spacing: 10px;
+
+$tab-spacing-h: 10px;
+$tab-spacing-v: 5px;

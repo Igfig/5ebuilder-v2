@@ -2,8 +2,10 @@ html {
 	margin: 0;
 	padding: 0;
 	font-family: "Estrangelo Edessa", sans-serif;
+	font-size: $base-font-size;
 }
 
 body {
-	padding: 2vw;
+	margin: 0;
+	padding: $body-padding;
 }
