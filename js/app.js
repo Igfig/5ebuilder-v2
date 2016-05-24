@@ -177,24 +177,31 @@ app.controller("monsterController", function($scope, $http, $filter) {
 		}
 		
 		// calculate monster hp
-		$scope.$watchGroup(//["monster.size.hd", "monster.hd", "monster.abilities[2].mod"],
-				["monster.size.hd", "monster.hd", abMod('Con')],
-				function(){
+		$scope.$watchGroup(["monster.size.hd", "monster.hd", getAbility('Con').mod],
+				function() {
 			$scope.monster.hp = diceAverage($scope.monster.hd, 
-					$scope.monster.size.hd, abMod('Con'));
+					$scope.monster.size.hd, getAbility('Con').mod);
+			
+			if ($scope.builder.hdMode == "fixed") {
+				//set target hp to current hp
+				$scope.builder.hpTarget = $scope.monster.hp;
+			}
+		});
+		
+		// bind target hp to HD
+		$scope.$watch("builder.hpTarget", function() {
+			if ($scope.builder.hdMode == "dynamic") {
+				$scope.monster.hd = getNumDiceFromAverage($scope.builder.hpTarget, 
+						$scope.monster.size.hd, getAbility('Con').mod);
+			}
 		});
 		
 		
 		// functions dependent on loaded variables
 		
 		$scope.newAttack = function() {
-			var attack = {damage:{	dice:{
-										num: 1, 
-										size: 8},
-									total: 4}}
-			
+			var attack = $scope.builder.defaultAttack;
 			$scope.monster.attacks.push(attack);
-			
 			bindTotalDamageToAttack(attack);
 		}
 	});
@@ -209,6 +216,12 @@ app.controller("monsterController", function($scope, $http, $filter) {
 	
 	
 	/* PRIVATE FUNCTIONS */
+	
+	
+	function expressionFromObject(objectName) { //TODO: change name
+		return $scope[objectName]; //no, gotta split this on dots
+	}
+	
 	
 	/* binds an ability's mod to its base score */
 	function bindModToAbility(ability) {
@@ -228,6 +241,7 @@ app.controller("monsterController", function($scope, $http, $filter) {
 	
 	function bindTotalDamageToAttack(attack) {
 		$scope.$watchGroup(function(){
+			console.log([attack.damage.dice.num, attack.damage.dice.size, "monster.abilities[0].mod"]);
 			return [attack.damage.dice.num, attack.damage.dice.size, "monster.abilities[0].mod"];
 			
 		}, function(){
@@ -240,6 +254,11 @@ app.controller("monsterController", function($scope, $http, $filter) {
 		return Math.floor(num * ((size + 1) / 2 + bonus));
 	}
 	
+	function getNumDiceFromAverage(average, size, bonus) {
+		bonus = bonus || 0;
+		return Math.round(average / ((size + 1) / 2 + bonus));
+	}
+	
 	function getFromArray(array, value) {
 		try {
 			return $filter('filter')(array, {id: value})[0];
@@ -248,8 +267,9 @@ app.controller("monsterController", function($scope, $http, $filter) {
 		}
 	}
 	
-	function abMod(ability) {
-		return getFromArray($scope.abilities, ability);
+	function getAbility(ability) {
+		console.log(getFromArray($scope.monster.abilities, ability));
+		return getFromArray($scope.monster.abilities, ability);
 	}
 });
 

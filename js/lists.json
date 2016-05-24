@@ -19,7 +19,7 @@
 			"any lawful alignment", "any non-lawful alignment", "any chaotic alignment",
 			"any non-chaotic alignment", "any neutral alignment",
 			"any non-neutral alignment" ],
-	"monster" : {
+	"monster": {
 		"abilities": [	{ "id" : "Str", "score" : 10, "mod" : 0 },
 						{ "id" : "Dex", "score" : 10, "mod" : 0 }, 
 						{ "id" : "Con", "score" : 10, "mod" : 0 },
@@ -28,12 +28,19 @@
 						{ "id" : "Cha", "score" : 10, "mod" : 0 } ],
 		"alignment": "any alignment",
 		"attacks": [],
-		"hd" : 1,
+		"hd": 1,
 		"movement" : [	{ "id": "", "speed": 0 },
 						{ "id": "fly", "speed": 0 },
 						{ "id": "swim", "speed": 0 },
 						{ "id": "climb", "speed": 0 },
 						{ "id": "burrow", "speed": 0 } ],
 		"type": "humanoid"
+	},
+	"builder": {
+		"hdMode": "fixed",
+		"defaultAttack" : {
+			"name": "",
+			"damage": { "dice": { "num": 1, "size": 8 }}
+		}
 	}
 } 

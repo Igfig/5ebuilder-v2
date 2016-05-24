@@ -28,8 +28,8 @@
 			<output ng-bind="monster.hp"></output> 
 			(<output ng-bind="monster.hd">
 			</output>d<output ng-bind="monster.size.hd">
-			</output><span	ng-if="abilities[2].mod">+<output 
-							ng-bind="abilities[2].mod * monster.hd"></output></span>)<br>
+			</output><span	ng-if="monster.abilities[2].mod">+<output 
+							ng-bind="monster.abilities[2].mod * monster.hd"></output></span>)<br>
 		<b>Speed:</b> <ul class="inline">
 			<li ng-repeat="movement in monster.movement"
 				 ng-if="movement.speed > 0">
@@ -128,11 +128,10 @@
 				<h3>Speed</h3>
 				
 				<ul>
-				<li ng-repeat="movement in monster.movement">
-					<label><span ng-bind="movement.id"></span> speed: 
-					<input type="number" min="0" max="9999" step="10" 
-						ng-model="movement.speed"><br></label>
-						</li>
+					<li ng-repeat="movement in monster.movement">
+						<label><span ng-bind="movement.id"></span> speed: 
+						<input type="number" min="0" max="9999" step="10" 
+							ng-model="movement.speed"> ft</label><br></li>
 				</ul>
 				<small>Speeds should be multiples of 10.<br>
 				Exception: a speed of 5 ft. is okay.</small>
@@ -141,15 +140,17 @@
 			<section id="HD">
 				<h3>HD</h3>
 				<label>
-					<input type="radio" name="hd-mode" value="declare">
+					<input type="radio" value="fixed" ng-model="builder.hdMode">
 					Use specific number of HD:
-					<input type="number" min="1" max="999" value="1" 
-							ng-model="monster.hd" selected>d<output 
+					<input type="number" min="1" max="999"
+							ng-model="monster.hd"
+							ng-disabled="builder.hdMode!='fixed'">d<output 
 							ng-bind="monster.size.hd"></output></label><br>
-				<label><input type="radio" name="hd-mode" value="match">
+				<label><input type="radio" value="dynamic" ng-model="builder.hdMode">
 					Match to target amount of hp:
 					<input type="number" min="0" max="9999" 
-							ng-model="monster.hptarget"></label>
+							ng-model="builder.hpTarget"
+							ng-disabled="builder.hdMode!='dynamic'"></label>
 			</section>
 		</form>
 	</section>

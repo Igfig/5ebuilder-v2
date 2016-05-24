@@ -1,4 +1,10 @@
 <label>Name: <input type="text" ng-model="attack.name"></label>
-<label>Damage: <input type="number" 
-ng-model="attack.damage.dice.num"> d <input type="number" 
-ng-model="attack.damage.dice.size"></label>
+<label>Damage: <input type="number" min="1" max="999" ng-model="attack.damage.dice.num"> 
+	d<select ng-model="attack.damage.dice.size">
+		<option>1</option>
+		<option>4</option>
+		<option>6</option>
+		<option>8</option>
+		<option>10</option>
+		<option>12</option>
+	</select></label>
