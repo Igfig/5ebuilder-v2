@@ -466,6 +466,11 @@ body {
 .tab-content h2 {
   m/argin: 0;
 }
+/* anything in this file will need to be put into a different file eventually, but for now I'm not sure what the correct place is */
+
+li:last-child .list-separator {
+	display: none;
+}
 .inline {
 	display: inline
 }

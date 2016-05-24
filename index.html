@@ -33,8 +33,8 @@
 		<b>Speed:</b> <ul class="inline">
 			<li ng-repeat="movement in monster.movement"
 				 ng-if="movement.speed > 0">
-			<span ng-bind="movement.type"></span>
-			<output ng-bind="movement.speed"></output> ft.</li>
+			<span ng-bind="movement.id"></span>
+			<output ng-bind="movement.speed"></output> ft<span class="list-separator">,</span></li>
 		</ul>						
 		
 		<hr>
@@ -74,6 +74,9 @@
 		<h2>Stats</h2>
 	
 		<form class="builder-block">
+			<!-- TODO: a thought: maybe each of these sections should be a fieldset actually  -->
+		
+		
 			<section id="info">
 				<h3>Info</h3>
 				
@@ -126,7 +129,7 @@
 				
 				<ul>
 				<li ng-repeat="movement in monster.movement">
-					<label><span ng-bind="movement.type"></span> speed: 
+					<label><span ng-bind="movement.id"></span> speed: 
 					<input type="number" min="0" max="9999" step="10" 
 						ng-model="movement.speed"><br></label>
 						</li>
@@ -137,8 +140,16 @@
 			
 			<section id="HD">
 				<h3>HD</h3>
-				
-				<label><input type="number" ng-model="monster.hd"></label>
+				<label>
+					<input type="radio" name="hd-mode" value="declare">
+					Use specific number of HD:
+					<input type="number" min="1" max="999" value="1" 
+							ng-model="monster.hd" selected>d<output 
+							ng-bind="monster.size.hd"></output></label><br>
+				<label><input type="radio" name="hd-mode" value="match">
+					Match to target amount of hp:
+					<input type="number" min="0" max="9999" 
+							ng-model="monster.hptarget"></label>
 			</section>
 		</form>
 	</section>
