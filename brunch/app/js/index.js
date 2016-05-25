@@ -50,15 +50,12 @@ app.controller("monsterController", function($scope, $http, $filter) {
 			$scope.monster.attacks.push(attack);
 			bindTotalDamageToAttack(attack);
 		}
+		
+		$scope.goToTab = function(tab) {
+			$scope.builder.tab = tab;
+		}
 	});
-	
-	$scope.tab = "stats";
-	
-	$scope.goToTab = function(tab) {
-		$scope.tab = tab;
-	}
-	
-	
+
 	
 	
 	/* PRIVATE FUNCTIONS */

@@ -37,6 +37,7 @@
 		"type": "humanoid"
 	},
 	"builder": {
+		"tab": "stats",
 		"hdMode": "fixed",
 		"defaultAttack" : {
 			"name": "",

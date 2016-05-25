@@ -70,15 +70,15 @@
 </nav>
 
 <div class="tab-content">
-	<section id="stats" ng-show="tab=='stats'">
+	<section id="stats" ng-show="builder.tab=='stats'">
 		<h2>Stats</h2>
 	
 		<form class="builder-block">
 			<!-- TODO: a thought: maybe each of these sections should be a fieldset actually  -->
 		
 		
-			<section id="info">
-				<h3>Info</h3>
+			<fieldset id="info">
+				<legend>Info</legend>
 				
 				<label>Name: <input type="text" 
 						ng-model="monster.name" required></label><br>
@@ -107,10 +107,10 @@
 						ng-options="alignment for alignment in ALIGNMENTS">
 				</select>
 				</label>
-			</section>
+			</fieldset>
 			
-			<section id="abilities">
-				<h3>Abilities</h3>
+			<fieldset id="abilities">
+				<legend>Abilities</legend>
 				
 				<ul class="two-columns">
 					<!-- <div ng-repeat="(index, ability) in abilities"> -->
@@ -122,10 +122,10 @@
 							</output>
 					</li>
 				</ul>
-			</section>
+			</fieldset>
 			
-			<section id="speed">
-				<h3>Speed</h3>
+			<fieldset id="speed">
+				<legend>Speed</legend>
 				
 				<ul>
 					<li ng-repeat="movement in monster.movement">
@@ -135,10 +135,10 @@
 				</ul>
 				<small>Speeds should be multiples of 10.<br>
 				Exception: a speed of 5 ft. is okay.</small>
-			</section>
+			</fieldset>
 			
-			<section id="HD">
-				<h3>HD</h3>
+			<fieldset id="HD">
+				<legend>HD</legend>
 				<label>
 					<input type="radio" value="fixed" ng-model="builder.hdMode">
 					Use specific number of HD:
@@ -151,15 +151,15 @@
 					<input type="number" min="0" max="9999" 
 							ng-model="builder.hpTarget"
 							ng-disabled="builder.hdMode!='dynamic'"></label>
-			</section>
+			</fieldset>
 		</form>
 	</section>
 	
-	<section id="features" ng-show="tab=='features'">
+	<section id="features" ng-show="builder.tab=='features'">
 		<h2>Features</h2>
 	</section>
 	
-	<section id="attacks" ng-show="tab=='attacks'">
+	<section id="attacks" ng-show="builder.tab=='attacks'">
 		<h2>Attacks</h2>
 		
 		<ul>
