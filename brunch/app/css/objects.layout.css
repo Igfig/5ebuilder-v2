@@ -1,4 +1,6 @@
 .untabbed-block { /* FIXME: needs better name */
 	float: right;
 	width: $untabbed-width;	
+	margin-right: $body-padding;
+	margin-left: calc($body-padding * 2);
 } 

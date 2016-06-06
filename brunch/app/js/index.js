@@ -1,5 +1,18 @@
 /* TODO: find a better way to refer to Con mod than "monster.abilities[2].mod"
  * Ideally, should be able to refer to it by name
+ * 
+ * I think we might actually want to go back to storing a lot of these as 
+ * objects instead of arrays, actually. The orders matter only in one place, 
+ * and the elements of the collection don't actually change.
+ * 
+ * The thing to do would be to have the objects, and then have an object 
+ * somewhere called Orderings, which contains array orderings for all the 
+ * various objects out there.
+ * Or possibly: actually implement an ordered-dict sort of object.
+ * Or maybe: write a function that turns an object into an array sorted 
+ * according to some property of each of the object's values.
+ * 
+ * Probably the first of these. It's the least prone to screwing up.
  */
 
 
@@ -23,7 +36,7 @@ app.controller("monsterController", function($scope, $http, $filter) {
 		}
 		
 		// calculate monster hp
-		$scope.$watchGroup(["monster.size.hd", "monster.hd", getAbility('Con').mod],
+		$scope.$watchGroup(["monster.size.hd", "monster.hd", "monster.abilities[2].mod"],
 				function() {
 			$scope.monster.hp = diceAverage($scope.monster.hd, 
 					$scope.monster.size.hd, getAbility('Con').mod);
@@ -41,6 +54,7 @@ app.controller("monsterController", function($scope, $http, $filter) {
 						$scope.monster.size.hd, getAbility('Con').mod);
 			}
 		});
+		
 		
 		
 		// functions dependent on loaded variables
@@ -111,7 +125,8 @@ app.controller("monsterController", function($scope, $http, $filter) {
 	}
 	
 	function getAbility(ability) {
-		console.log(getFromArray($scope.monster.abilities, ability));
+		//console.log(getFromArray($scope.monster.abilities, ability));
+		console.log($scope.monster.abilities);
 		return getFromArray($scope.monster.abilities, ability);
 	}
 });
